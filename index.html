@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<title>야구수첩</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+  <h1>⚾ 야구수첩</h1>
+</header>
+
+<!-- 스탯 바 (터치하면 상세 펼침) -->
+<section class="stats" id="statsBox">
+  <div class="stats-main" id="statsMain"></div>
+  <div class="stats-toggle" id="statsTgl">▼ 상세</div>
+  <div class="stats-detail" id="statsDtl"></div>
+</section>
+
+<!-- 카드 영역 -->
+<section class="cards" id="cardArea"></section>
+<div class="card-counter" id="cardCnt"></div>
+
+<!-- + 버튼 -->
+<button class="fab" id="fabBtn">+</button>
+
+<!-- 모달 컨테이너 -->
+<div class="modal-bg" id="modalBg">
+  <div class="modal-box" id="modalBox"></div>
+</div>
+
+<script src="app.js"></script>
+<script src="ui.js"></script>
+<script src="modal.js"></script>
+</body>
+</html>

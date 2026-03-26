@@ -1,0 +1,403 @@
+* { margin:0; padding:0; box-sizing:border-box }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #f0f2f5;
+  min-height: 100vh;
+  padding-bottom: 90px;
+}
+
+/* 헤더 */
+.header {
+  background: linear-gradient(135deg, #1a73e8, #0d47a1);
+  color: #fff;
+  padding: 18px 16px;
+  text-align: center;
+}
+.header h1 { font-size: 21px }
+
+/* 스탯 박스 */
+.stats {
+  background: #fff;
+  margin: 10px 12px;
+  border-radius: 14px;
+  padding: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+  cursor: pointer;
+}
+.stats-main {
+  display: flex;
+  justify-content: space-around;
+}
+.stats-toggle {
+  text-align: center;
+  font-size: 10px;
+  color: #aaa;
+  margin-top: 4px;
+}
+.stats-detail {
+  display: none;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #eee;
+}
+.stats-detail.open { display: flex }
+.stat-item { text-align: center; min-width: 48px; margin: 3px 0 }
+.stat-val { font-size: 17px; font-weight: 700; color: #1a73e8 }
+.stat-val2 { font-size: 15px; font-weight: 700; color: #555 }
+.stat-lbl { font-size: 9px; color: #888; margin-top: 1px }
+
+/* 카드 영역 */
+.cards {
+  position: relative;
+  height: 440px;
+  margin: 12px 16px;
+  perspective: 800px;
+}
+.game-card {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: #fff;
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.1);
+  transition: transform .4s ease, opacity .4s ease;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+.card-counter {
+  text-align: center;
+  margin-top: 6px;
+  font-size: 12px;
+  color: #999;
+}
+
+/* 카드 내부 */
+.card-title { font-size: 15px; font-weight: 700; color: #222 }
+.card-line { font-size: 12px; color: #1a73e8; font-weight: 600; margin: 2px 0 10px }
+.ab-list { display: flex; flex-wrap: wrap; gap: 5px }
+.ab-chip {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6px 10px 5px;
+  border-radius: 10px;
+  cursor: pointer;
+  min-width: 44px;
+  text-align: center;
+}
+.ab-chip:active { opacity: .7; transform: scale(.95) }
+.ab-chip.hit { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7 }
+.ab-chip.out { background: #ffebee; color: #c62828; border: 1px solid #ef9a9a }
+.ab-chip.walk { background: #e3f2fd; color: #1565c0; border: 1px solid #90caf9 }
+.ab-chip.etc { background: #f3e5f5; color: #6a1b9a; border: 1px solid #ce93d8 }
+.chip-main { font-size: 12px; font-weight: 700 }
+.chip-sub { font-size: 8px; opacity: .7; margin-top: 1px }
+
+/* 메모 영역 */
+.memo-section { flex: 1; margin-top: 10px }
+.memo-title {
+  font-size: 15px;
+  font-weight: 700;
+  border-bottom: 2px solid #1a73e8;
+  padding-bottom: 4px;
+  margin-bottom: 6px;
+}
+.memo-text {
+  font-size: 14px;
+  color: #333;
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+.memo-empty {
+  font-size: 13px;
+  color: #ccc;
+  font-style: italic;
+  cursor: pointer;
+}
+.memo-ab-list {
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px solid #eee;
+}
+.memo-ab-item {
+  font-size: 11px;
+  color: #777;
+  margin-bottom: 3px;
+  padding-left: 8px;
+  border-left: 2px solid #ddd;
+}
+.memo-ab-item b { color: #555 }
+
+/* 카드 하단 버튼 */
+.card-btns {
+  margin-top: auto;
+  padding-top: 8px;
+  display: flex;
+  gap: 6px;
+}
+.btn-sm {
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #fafafa;
+  color: #888;
+  font-size: 10px;
+  cursor: pointer;
+}
+.btn-sm:active { background: #e3f2fd; color: #1a73e8 }
+.btn-del { background: #fff5f5; color: #e57373; margin-left: auto }
+
+/* 빈 상태 */
+.empty-msg {
+  text-align: center;
+  padding: 80px 20px;
+  color: #bbb;
+  font-size: 14px;
+}
+
+/* FAB */
+.fab {
+  position: fixed;
+  bottom: 22px; right: 22px;
+  width: 54px; height: 54px;
+  border-radius: 50%;
+  border: none;
+  background: #1a73e8;
+  color: #fff;
+  font-size: 26px;
+  box-shadow: 0 4px 14px rgba(0,0,0,.3);
+  cursor: pointer;
+  z-index: 9999;
+}
+.fab:active { transform: scale(.9) }
+
+/* 모달 */
+.modal-bg {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,.4);
+  z-index: 10000;
+  align-items: flex-end;
+  justify-content: center;
+}
+.modal-bg.show { display: flex }
+.modal-box {
+  background: #fff;
+  border-radius: 18px 18px 0 0;
+  width: 100%;
+  max-width: 460px;
+  max-height: 82vh;
+  overflow-y: auto;
+  padding: 22px 18px 30px;
+  position: relative;
+}
+.modal-close {
+  position: absolute;
+  top: 14px; right: 16px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #999;
+  cursor: pointer;
+}
+.modal-title { font-size: 16px; font-weight: 700; margin-bottom: 14px }
+.modal-label { font-size: 12px; color: #888; margin-bottom: 6px; font-weight: 600 }
+.modal-grid { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 12px }
+.modal-btn {
+  padding: 9px 14px;
+  border-radius: 10px;
+  border: 1.5px solid #ddd;
+  background: #fafafa;
+  font-size: 13px;
+  cursor: pointer;
+}
+.modal-btn:active { background: #1a73e8; color: #fff; border-color: #1a73e8 }
+.modal-input {
+  width: 100%;
+  padding: 10px;
+  border: 1.5px solid #ddd;
+  border-radius: 10px;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+.modal-textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1.5px solid #ddd;
+  border-radius: 10px;
+  font-size: 13px;
+  resize: none;
+  height: 100px;
+  margin-bottom: 10px;
+}
+.modal-primary {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  background: #1a73e8;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* 필드 다이어그램 */
+.field-wrap { position: relative; width: 240px; height: 240px; margin: 0 auto 12px }
+.field-wrap svg { width: 100%; height: 100% }
+.field-pos {
+  position: absolute;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  z-index: 5;
+}
+.field-pos:active, .field-pos.on {
+  background: #1a73e8;
+  color: #fff;
+  border-color: #1a73e8;
+}
+
+/* 방향 그리드 */
+.dir-grid {
+  display: grid;
+  grid-template-columns: repeat(3,48px);
+  grid-template-rows: repeat(3,48px);
+  gap: 3px;
+  justify-content: center;
+  margin: 0 auto 12px;
+}
+.dir-btn {
+  border-
+/* 방향 정위치 버튼 */
+.dir-mid {
+  background: #fff3e0;
+  color: #e65100;
+  border-color: #ffcc80;
+  font-weight: 700;
+}
+.dir-mid:active { background: #e65100; color: #fff }
+
+/* 상세 모달 행 */
+.detail-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.detail-row label {
+  font-size: 14px;
+  color: #555;
+  font-weight: 600;
+  min-width: 40px;
+}
+.detail-btns {
+  display: flex;
+  gap: 6px;
+}
+.det-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  border: 2px solid #ddd;
+  background: #fafafa;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  transition: all .15s;
+}
+.det-btn.on {
+  background: #1a73e8;
+  color: #fff;
+  border-color: #1a73e8;
+  box-shadow: 0 2px 8px rgba(26,115,232,.3);
+}
+.det-btn:active {
+  transform: scale(.93);
+}
+
+/* 삭제 버튼 */
+.modal-del {
+  flex: 1;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  background: #ffebee;
+  color: #c62828;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* 타석 상세 모달 */
+.detail-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.detail-row label {
+  font-size: 14px;
+  color: #555;
+  font-weight: 600;
+  min-width: 40px;
+}
+.detail-btns {
+  display: flex;
+  gap: 6px;
+}
+.det-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  border: 2px solid #ddd;
+  background: #fafafa;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  transition: all .15s;
+}
+.det-btn.on {
+  background: #1a73e8;
+  color: #fff;
+  border-color: #1a73e8;
+  box-shadow: 0 2px 8px rgba(26,115,232,.3);
+}
+.det-btn:active {
+  transform: scale(.93);
+}
+.modal-del {
+  flex: 1;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  background: #ffebee;
+  color: #c62828;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
