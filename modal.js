@@ -139,16 +139,12 @@ function pF(f) {
 function showStep3() {
   var h = '<button class="modal-close" onclick="closeModal()">✕</button>';
   h += '<div class="modal-title">타구 방향 (' + (FN[abF] || abF) + ')</div>';
-  h += '<div class="dir-grid">';
-  h += '<button class="dir-btn" onclick="pD(\'좌앞\')">↖</button>';
-  h += '<button class="dir-btn" onclick="pD(\'앞\')">⬆</button>';
-  h += '<button class="dir-btn" onclick="pD(\'우앞\')">↗</button>';
-  h += '<button class="dir-btn" onclick="pD(\'좌\')">⬅</button>';
-  h += '<button class="dir-btn dir-mid" onclick="pD(\'정위치\')">정</button>';
-  h += '<button class="dir-btn" onclick="pD(\'우\')">➡</button>';
-  h += '<button class="dir-btn" onclick="pD(\'좌뒤\')">↙</button>';
-  h += '<button class="dir-btn" onclick="pD(\'뒤\')">⬇</button>';
-  h += '<button class="dir-btn" onclick="pD(\'우뒤\')">↘</button>';
+  h += '<div class="modal-grid" style="justify-content:center">';
+  h += '<button class="modal-btn" onclick="pD(\'좌\')">좌측</button>';
+  h += '<button class="modal-btn" onclick="pD(\'앞\')">앞</button>';
+  h += '<button class="modal-btn" onclick="pD(\'정위치\')">정위치</button>';
+  h += '<button class="modal-btn" onclick="pD(\'뒤\')">뒤</button>';
+  h += '<button class="modal-btn" onclick="pD(\'우\')">우측</button>';
   h += '</div>';
   openModal(h);
 }
