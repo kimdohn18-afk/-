@@ -1,637 +1,662 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>🧙‍♂️ 옐미의 마법학교 입학허가증</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Gaegu:wght@300;400;700&display=swap');
-        *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-        body{
-            background:#0a0a2e;min-height:100vh;min-height:-webkit-fill-available;
-            display:-webkit-flex;display:flex;
-            -webkit-justify-content:center;justify-content:center;
-            -webkit-align-items:flex-start;align-items:flex-start;
-            padding:20px 0 60px;font-family:'Gaegu',cursive;
-            overflow-x:hidden;-webkit-font-smoothing:antialiased;
-        }
-        html{height:-webkit-fill-available}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>🧙‍♂️ 옐미의 마법학교 입학허가증</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{height:100%;overflow-x:hidden;}
+body{
+  min-height:100%;min-height:-webkit-fill-available;
+  background:#0a0a2e;color:#e8d5f5;
+  font-family:'Gaegu','Apple SD Gothic Neo',sans-serif;
+  overflow-x:hidden;position:relative;
+}
 
-        /* 별 */
-        .star{position:fixed;background:#fff;border-radius:50%;pointer-events:none;z-index:0;
-            -webkit-animation:tw var(--d) ease-in-out infinite;animation:tw var(--d) ease-in-out infinite}
-        @-webkit-keyframes tw{0%,100%{opacity:.15}50%{opacity:.8}}
-        @keyframes tw{0%,100%{opacity:.15}50%{opacity:.8}}
+/* ===== 별 & 반딧불 ===== */
+#stars{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;}
+.star{position:absolute;background:#fff;border-radius:50%;}
+.ff{position:fixed;border-radius:50%;pointer-events:none;z-index:0;
+  -webkit-animation:floatFly 6s ease-in-out infinite;animation:floatFly 6s ease-in-out infinite;}
 
-        /* 반딧불 */
-        .firefly{position:fixed;width:6px;height:6px;background:#ffd700;border-radius:50%;
-            box-shadow:0 0 10px #ffd700,0 0 20px #ffd700;pointer-events:none;z-index:1;
-            -webkit-animation:ff var(--d) ease-in-out infinite;animation:ff var(--d) ease-in-out infinite}
-        @-webkit-keyframes ff{0%{-webkit-transform:translate(0,0);opacity:0}10%{opacity:1}50%{-webkit-transform:translate(var(--tx),var(--ty));opacity:.8}100%{-webkit-transform:translate(var(--tx2),var(--ty2));opacity:0}}
-        @keyframes ff{0%{transform:translate(0,0);opacity:0}10%{opacity:1}50%{transform:translate(var(--tx),var(--ty));opacity:.8}100%{transform:translate(var(--tx2),var(--ty2));opacity:0}}
+@-webkit-keyframes twinkle{0%,100%{opacity:.3}50%{opacity:1}}
+@keyframes twinkle{0%,100%{opacity:.3}50%{opacity:1}}
+@-webkit-keyframes floatFly{0%,100%{-webkit-transform:translateY(0) translateX(0)}25%{-webkit-transform:translateY(-30px) translateX(15px)}50%{-webkit-transform:translateY(-10px) translateX(-10px)}75%{-webkit-transform:translateY(-40px) translateX(5px)}}
+@keyframes floatFly{0%,100%{transform:translateY(0) translateX(0)}25%{transform:translateY(-30px) translateX(15px)}50%{transform:translateY(-10px) translateX(-10px)}75%{transform:translateY(-40px) translateX(5px)}}
 
-        /* 프로그레스 */
-        .progress-bar{position:fixed;top:0;left:0;height:3px;
-            background:linear-gradient(90deg,#ffd700,#ffaa00);
-            -webkit-transition:width .5s ease;transition:width .5s ease;
-            z-index:100;box-shadow:0 0 10px rgba(255,215,0,.5)}
+/* ===== 프로그레스 바 ===== */
+#progWrap{position:fixed;top:0;left:0;width:100%;height:4px;background:rgba(255,215,0,.15);z-index:100;}
+#progBar{height:100%;width:0;background:linear-gradient(90deg,#ffd700,#ffaa00);
+  -webkit-transition:width .6s;transition:width .6s;border-radius:0 2px 2px 0;}
 
-        /* 컨테이너 */
-        .container{position:relative;z-index:10;width:92%;max-width:620px;padding:20px 0}
+/* ===== 컨테이너 & 메인카드 ===== */
+.wrap{position:relative;z-index:1;max-width:480px;margin:0 auto;padding:20px 16px 40px;}
+.card{
+  background:linear-gradient(160deg,#1a1a4e 0%,#12103a 50%,#1e1650 100%);
+  border:1.5px solid rgba(255,215,0,.4);border-radius:20px;
+  padding:28px 20px;margin-bottom:20px;position:relative;overflow:hidden;
+  -webkit-animation:cardIn .5s ease-out;animation:cardIn .5s ease-out;
+}
+.card::after{
+  content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,215,0,.04),transparent);
+  -webkit-animation:shimmer 4s ease-in-out infinite;animation:shimmer 4s ease-in-out infinite;
+}
+@-webkit-keyframes cardIn{from{opacity:0;-webkit-transform:translateY(20px)}to{opacity:1;-webkit-transform:translateY(0)}}
+@keyframes cardIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@-webkit-keyframes shimmer{0%{left:-100%}50%{left:100%}100%{left:100%}}
+@keyframes shimmer{0%{left:-100%}50%{left:100%}100%{left:100%}}
 
-        /* 메인 카드 */
-        .card{
-            background:linear-gradient(145deg,#1a1a4e,#2a1a3e);
-            border:2px solid #ffd700;border-radius:20px;padding:35px 24px;
-            box-shadow:0 0 30px rgba(255,215,0,.15);
-            position:relative;overflow:hidden;
-            -webkit-animation:cardIn .8s ease-out;animation:cardIn .8s ease-out;
-        }
-        .card::before{
-            content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;
-            background:radial-gradient(circle,rgba(255,215,0,.03) 0%,transparent 70%);
-            -webkit-animation:shimmer 4s ease-in-out infinite;animation:shimmer 4s ease-in-out infinite;
-        }
-        @-webkit-keyframes shimmer{0%,100%{-webkit-transform:rotate(0)}50%{-webkit-transform:rotate(180deg)}}
-        @keyframes shimmer{0%,100%{transform:rotate(0)}50%{transform:rotate(180deg)}}
-        @-webkit-keyframes cardIn{from{opacity:0;-webkit-transform:translateY(30px) scale(.95)}to{opacity:1;-webkit-transform:translateY(0) scale(1)}}
-        @keyframes cardIn{from{opacity:0;transform:translateY(30px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}
+.chap{color:rgba(255,215,0,.6);font-size:12px;letter-spacing:2px;margin-bottom:4px;}
+.ttl{color:#ffd700;font-size:22px;font-weight:700;margin-bottom:12px;}
+.txt{color:#e8d5f5;font-size:16px;line-height:1.7;margin-bottom:16px;}
+.prev{color:#c8a0ff;font-size:14px;font-style:italic;margin-bottom:10px;}
 
-        .si{text-align:center;margin-bottom:12px;font-size:14px;color:#ffd700;letter-spacing:3px;opacity:.7;position:relative;z-index:1}
-        .ct{text-align:center;color:#ffd700;font-size:28px;font-weight:700;margin-bottom:18px;text-shadow:0 0 20px rgba(255,215,0,.3);position:relative;z-index:1}
-        .ct .em{font-size:42px;display:block;margin-bottom:10px}
-        .tx{color:#e8d5f5;font-size:19px;line-height:1.85;margin-bottom:22px;text-align:center;position:relative;z-index:1;word-break:keep-all}
-        .hl{color:#ffd700;font-weight:700}
+/* ===== 플립 카드 그리드 ===== */
+.grid{display:-webkit-flex;display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:16px 0;}
+.fc{
+  width:calc(50% - 6px);max-width:210px;height:220px;
+  -webkit-perspective:1000px;perspective:1000px;cursor:pointer;
+}
+.fi{
+  position:relative;width:100%;height:100%;
+  -webkit-transition:-webkit-transform .7s cubic-bezier(.4,.2,.2,1);
+  transition:transform .7s cubic-bezier(.4,.2,.2,1);
+  -webkit-transform-style:preserve-3d;transform-style:preserve-3d;
+}
+.fc.flipped .fi{-webkit-transform:rotateY(180deg);transform:rotateY(180deg);}
 
-        /* ===== 플립 카드 그리드 ===== */
-        .flip-grid{
-            display:-webkit-flex;display:flex;
-            -webkit-flex-wrap:wrap;flex-wrap:wrap;
-            gap:14px;-webkit-justify-content:center;justify-content:center;
-            position:relative;z-index:1;margin-bottom:16px;
-        }
+.ff2,.fb{
+  position:absolute;top:0;left:0;width:100%;height:100%;
+  -webkit-backface-visibility:hidden;backface-visibility:hidden;
+  border-radius:16px;overflow:hidden;
+}
 
-        .flip-card{
-            width:calc(50% - 7px);max-width:230px;height:240px;
-            -webkit-perspective:1000px;perspective:1000px;
-            cursor:pointer;
-        }
+/* 카드 앞면 */
+.ff2{
+  background:linear-gradient(160deg,#1a0a3e,#0d0628,#1a0a3e);
+  border:2px solid #ffd700;
+  display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direction:column;
+  -webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;
+  z-index:2;
+}
+.ff2::before{
+  content:'';position:absolute;top:6px;left:6px;right:6px;bottom:6px;
+  border:1px solid rgba(255,215,0,.3);border-radius:12px;pointer-events:none;
+}
+.ff2::after{
+  content:'';position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none;
+  background:
+    radial-gradient(circle at 14px 14px,rgba(255,215,0,.35) 0%,transparent 8px),
+    radial-gradient(circle at calc(100% - 14px) 14px,rgba(255,215,0,.35) 0%,transparent 8px),
+    radial-gradient(circle at 14px calc(100% - 14px),rgba(255,215,0,.35) 0%,transparent 8px),
+    radial-gradient(circle at calc(100% - 14px) calc(100% - 14px),rgba(255,215,0,.35) 0%,transparent 8px);
+  border-radius:16px;
+}
+.diamond{
+  width:54px;height:54px;border:2px solid rgba(255,215,0,.5);
+  -webkit-transform:rotate(45deg);transform:rotate(45deg);
+  display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;
+  -webkit-justify-content:center;justify-content:center;margin-bottom:12px;position:relative;
+}
+.diamond::before{
+  content:'';position:absolute;top:4px;left:4px;right:4px;bottom:4px;
+  border:1px solid rgba(255,215,0,.25);
+}
+.diamond .di{-webkit-transform:rotate(-45deg);transform:rotate(-45deg);font-size:20px;}
+.fl{color:rgba(255,215,0,.5);font-size:11px;letter-spacing:3px;margin-top:2px;}
+.fm{color:#ffd700;font-size:26px;font-weight:700;margin-top:4px;}
+.front-shimmer{
+  position:absolute;top:0;left:-100%;width:60%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,215,0,.06),transparent);
+  -webkit-animation:shimmer 3s ease-in-out infinite;animation:shimmer 3s ease-in-out infinite;
+}
 
-        .flip-inner{
-            position:relative;width:100%;height:100%;
-            -webkit-transition:-webkit-transform .7s cubic-bezier(.4,.2,.2,1);
-            transition:transform .7s cubic-bezier(.4,.2,.2,1);
-            -webkit-transform-style:preserve-3d;transform-style:preserve-3d;
-        }
-        .flip-card.flipped .flip-inner{
-            -webkit-transform:rotateY(180deg);transform:rotateY(180deg);
-        }
+/* 카드 뒷면 */
+.fb{
+  background:linear-gradient(160deg,#1a1a4e,#12103a,#1e1650);
+  border:2px solid #ffd700;
+  -webkit-transform:rotateY(180deg);transform:rotateY(180deg);
+  display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direction:column;
+  -webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;
+  padding:16px 12px;z-index:1;
+}
+.fb::before{
+  content:'';position:absolute;top:6px;left:6px;right:6px;bottom:6px;
+  border:1px solid rgba(255,215,0,.2);border-radius:12px;pointer-events:none;
+}
+.bl{width:60%;height:1px;background:linear-gradient(90deg,transparent,rgba(255,215,0,.4),transparent);margin:4px 0;}
+.bi{font-size:32px;margin:6px 0;}
+.bd{color:#e8d5f5;font-size:14px;line-height:1.5;text-align:center;margin:4px 0;}
+.sb{
+  display:none;margin-top:8px;
+  background:linear-gradient(135deg,#ffd700,#f0c040);
+  border:none;border-radius:20px;padding:10px 22px;
+  color:#1a1a2e;font-size:14px;font-weight:700;font-family:'Gaegu',sans-serif;
+  cursor:pointer;-webkit-appearance:none;appearance:none;
+  box-shadow:0 2px 10px rgba(255,215,0,.3);
+  position:relative;z-index:10;
+}
+.sb:active{-webkit-transform:scale(.96);transform:scale(.96);opacity:.9;}
+.fc.flipped .sb{display:inline-block;}
 
-        .flip-front,.flip-back{
-            position:absolute;top:0;left:0;width:100%;height:100%;
-            -webkit-backface-visibility:hidden;backface-visibility:hidden;
-            border-radius:16px;overflow:hidden;
-        }
+/* ===== 일반 버튼 ===== */
+.btn{
+  display:inline-block;margin:10px auto;
+  background:linear-gradient(135deg,#ffd700,#f0c040);
+  border:none;border-radius:30px;padding:14px 36px;
+  color:#1a1a2e;font-size:17px;font-weight:700;font-family:'Gaegu',sans-serif;
+  cursor:pointer;-webkit-appearance:none;appearance:none;
+  box-shadow:0 2px 15px rgba(255,215,0,.3);
+}
+.btn:active{-webkit-transform:scale(.96);transform:scale(.96);opacity:.9;}
+.btnWrap{text-align:center;margin-top:12px;}
 
-        /* 카드 앞면 */
-        .flip-front{
-            background:linear-gradient(160deg,#1a0a3e,#0d0628,#1a0a3e);
-            border:2px solid #ffd700;
-            display:-webkit-flex;display:flex;
-            -webkit-flex-direction:column;flex-direction:column;
-            -webkit-align-items:center;align-items:center;
-            -webkit-justify-content:center;justify-content:center;
-            padding:20px;text-align:center;z-index:2;
-        }
-        .flip-front::before{
-            content:'';position:absolute;top:6px;left:6px;right:6px;bottom:6px;
-            border:1px solid rgba(255,215,0,.3);border-radius:12px;pointer-events:none;
-        }
-        .flip-front::after{
-            content:'';position:absolute;top:0;left:0;right:0;bottom:0;
-            background:
-                radial-gradient(circle at 12px 12px,rgba(255,215,0,.4) 0%,transparent 8px),
-                radial-gradient(circle at calc(100% - 12px) 12px,rgba(255,215,0,.4) 0%,transparent 8px),
-                radial-gradient(circle at 12px calc(100% - 12px),rgba(255,215,0,.4) 0%,transparent 8px),
-                radial-gradient(circle at calc(100% - 12px) calc(100% - 12px),rgba(255,215,0,.4) 0%,transparent 8px);
-            pointer-events:none;border-radius:16px;
-        }
+/* ===== 결과 카드 ===== */
+.result{
+  background:rgba(255,215,0,.06);border:1px solid rgba(255,215,0,.25);
+  border-radius:14px;padding:18px;margin-top:14px;text-align:center;
+  -webkit-animation:cardIn .5s ease-out;animation:cardIn .5s ease-out;
+}
+.ri{font-size:40px;margin-bottom:6px;}
+.rt{color:#ffd700;font-size:18px;font-weight:700;margin-bottom:6px;}
+.rd{color:#e8d5f5;font-size:15px;line-height:1.6;}
+.rp{color:#ffd700;font-size:13px;margin-top:8px;letter-spacing:1px;}
 
-        .front-shimmer{
-            position:absolute;top:0;left:-100%;width:60%;height:100%;
-            background:linear-gradient(90deg,transparent,rgba(255,215,0,.06),transparent);
-            -webkit-animation:fsh 3s ease-in-out infinite;animation:fsh 3s ease-in-out infinite;
-            pointer-events:none;
-        }
-        @-webkit-keyframes fsh{0%{left:-100%}50%{left:100%}100%{left:100%}}
-        @keyframes fsh{0%{left:-100%}50%{left:100%}100%{left:100%}}
+/* ===== 엔딩 ===== */
+.jItem{
+  background:rgba(255,215,0,.06);border:1px solid rgba(255,215,0,.15);
+  border-radius:10px;padding:10px 14px;margin:6px 0;text-align:left;
+  color:#e8d5f5;font-size:14px;
+}
+.jItem .ji{font-size:18px;margin-right:6px;}
+.endMsg{
+  color:#ffd700;font-size:18px;font-weight:700;line-height:1.7;
+  text-align:center;margin-top:20px;
+}
 
-        .front-deco{
-            width:60px;height:60px;border:2px solid rgba(255,215,0,.5);
-            -webkit-transform:rotate(45deg);transform:rotate(45deg);
-            display:-webkit-flex;display:flex;
-            -webkit-align-items:center;align-items:center;
-            -webkit-justify-content:center;justify-content:center;
-            margin-bottom:12px;position:relative;
-        }
-        .front-deco::before{
-            content:'';position:absolute;top:4px;left:4px;right:4px;bottom:4px;
-            border:1px solid rgba(255,215,0,.25);
-        }
-        .front-deco .deco-icon{
-            -webkit-transform:rotate(-45deg);transform:rotate(-45deg);font-size:24px;
-        }
-        .front-label{color:rgba(255,215,0,.5);font-size:11px;letter-spacing:3px;margin-top:4px}
-        .front-mystery{color:#ffd700;font-size:28px;font-weight:700;text-shadow:0 0 15px rgba(255,215,0,.4);margin-top:2px}
+/* ===== 축하 파티클 ===== */
+.confetti{
+  position:fixed;top:-10px;width:8px;height:8px;border-radius:50%;
+  z-index:200;pointer-events:none;
+  -webkit-animation:cfall linear forwards;animation:cfall linear forwards;
+}
+@-webkit-keyframes cfall{0%{-webkit-transform:translateY(0) rotate(0);opacity:1}100%{-webkit-transform:translateY(100vh) rotate(720deg);opacity:0}}
+@keyframes cfall{0%{transform:translateY(0) rotate(0);opacity:1}100%{transform:translateY(100vh) rotate(720deg);opacity:0}}
 
-        /* 카드 뒷면 */
-        .flip-back{
-            background:linear-gradient(160deg,#1a1a4e,#12103a,#1e1650);
-            border:2px solid #ffd700;
-            -webkit-transform:rotateY(180deg);transform:rotateY(180deg);z-index:1;
-            display:-webkit-flex;display:flex;
-            -webkit-flex-direction:column;flex-direction:column;
-            -webkit-align-items:center;align-items:center;
-            -webkit-justify-content:center;justify-content:center;
-            padding:18px 14px;text-align:center;
-        }
-        .flip-back::before{
-            content:'';position:absolute;top:6px;left:6px;right:6px;bottom:6px;
-            border:1px solid rgba(255,215,0,.2);border-radius:12px;pointer-events:none;
-        }
-
-        .back-line{width:60%;height:1px;background:linear-gradient(90deg,transparent,rgba(255,215,0,.4),transparent)}
-        .back-icon{font-size:36px;margin:8px 0}
-        .back-desc{color:#e8d5f5;font-size:16px;line-height:1.55;word-break:keep-all;margin:8px 0;position:relative;z-index:1}
-
-        .select-btn{
-            display:none;
-            background:linear-gradient(135deg,#ffd700,#f0c040);
-            border:none;border-radius:20px;padding:9px 22px;color:#1a1a2e;
-            font-family:'Gaegu',cursive;font-size:16px;font-weight:700;
-            cursor:pointer;margin-top:6px;
-            -webkit-appearance:none;appearance:none;
-            box-shadow:0 2px 10px rgba(255,215,0,.3);
-            position:relative;z-index:2;letter-spacing:.5px;
-        }
-        .flip-card.flipped .select-btn{display:inline-block}
-        .select-btn:active{-webkit-transform:scale(.93);transform:scale(.93)}
-
-        .select-hint{text-align:center;color:rgba(255,215,0,.45);font-size:15px;margin-top:8px;position:relative;z-index:1}
-
-        @media(hover:hover){
-            .flip-card:not(.flipped):hover .flip-front{box-shadow:0 0 25px rgba(255,215,0,.2)}
-        }
-        .flip-card:not(.flipped):active .flip-front{box-shadow:0 0 25px rgba(255,215,0,.2)}
-
-        /* 일반 버튼 */
-        .btn{
-            background:linear-gradient(135deg,#ffd700,#f0c040);
-            border:none;border-radius:30px;padding:14px 40px;color:#1a1a2e;
-            font-family:'Gaegu',cursive;font-size:20px;font-weight:700;
-            cursor:pointer;box-shadow:0 2px 15px rgba(255,215,0,.3);
-            display:block;margin:0 auto;position:relative;z-index:1;
-            -webkit-appearance:none;appearance:none;
-            -webkit-transition:all .2s;transition:all .2s;
-        }
-        .btn:active{-webkit-transform:scale(.95);transform:scale(.95)}
-
-        /* 결과 */
-        .re{font-size:50px;text-align:center;margin-bottom:15px;position:relative;z-index:1}
-        .rt{color:#ffd700;font-size:24px;font-weight:700;text-align:center;margin-bottom:15px;position:relative;z-index:1}
-        .rp{color:#fff;font-size:26px;font-weight:700;margin:15px auto;padding:12px 20px;background:rgba(255,215,0,.1);border-radius:12px;border:1px dashed #ffd700;text-align:center;max-width:400px;position:relative;z-index:1}
-        .rx{color:#e8d5f5;font-size:18px;line-height:1.7;margin-bottom:22px;text-align:center;position:relative;z-index:1;word-break:keep-all}
-
-        /* 엔딩 */
-        .et{color:#ffd700;font-size:32px;font-weight:700;text-align:center;margin-bottom:20px;text-shadow:0 0 20px rgba(255,215,0,.4)}
-        .ex{color:#e8d5f5;font-size:20px;line-height:2;text-align:center;word-break:keep-all}
-        .ed{color:#ffd700;font-size:16px;margin-top:25px;opacity:.7;text-align:center}
-        .js{margin-top:20px;padding:20px;background:rgba(255,215,0,.05);border-radius:15px;border:1px solid rgba(255,215,0,.2)}
-        .js h3{color:#ffd700;font-size:20px;margin-bottom:15px;text-align:center}
-        .ji{color:#e8d5f5;font-size:17px;padding:6px 0;text-align:center}
-
-        @media(max-width:480px){
-            .card{padding:28px 18px}
-            .ct{font-size:24px}.ct .em{font-size:36px}
-            .tx{font-size:17px}
-            .flip-card{height:220px}
-            .back-desc{font-size:14px}
-            .back-icon{font-size:30px}
-            .select-btn{font-size:14px;padding:8px 18px}
-            .rp{font-size:22px}
-            .et{font-size:26px}.ex{font-size:17px}
-        }
-        @media(max-width:370px){
-            .flip-card{height:200px}
-            .back-desc{font-size:13px}
-            .front-deco{width:50px;height:50px}
-            .front-mystery{font-size:24px}
-        }
-
-        ::-webkit-scrollbar{width:6px}
-        ::-webkit-scrollbar-track{background:#0a0a2e}
-        ::-webkit-scrollbar-thumb{background:#ffd700;border-radius:3px}
-    </style>
+/* ===== 반응형 ===== */
+@media(max-width:370px){
+  .fc{height:200px;}
+  .ttl{font-size:19px;}
+  .txt{font-size:15px;}
+  .bd{font-size:13px;}
+}
+</style>
 </head>
 <body>
-<div class="progress-bar" id="pb"></div>
-<div class="stars" id="stars"></div>
-<div class="container" id="gc"></div>
+<div id="progWrap"><div id="progBar"></div></div>
+<div id="stars"></div>
+<div class="wrap" id="app"></div>
 
 <script>
-// ===== 배경 =====
 (function(){
-    var s=document.getElementById('stars');
-    for(var i=0;i<70;i++){var d=document.createElement('div');d.className='star';var z=Math.random()*2+.5;
-    d.style.cssText='width:'+z+'px;height:'+z+'px;top:'+Math.random()*100+'%;left:'+Math.random()*100+'%;--d:'+(Math.random()*3+2)+'s;animation-delay:'+Math.random()*3+'s';s.appendChild(d)}
-    for(var i=0;i<6;i++){var f=document.createElement('div');f.className='firefly';
-    f.style.cssText='top:'+Math.random()*100+'%;left:'+Math.random()*100+'%;--d:'+(Math.random()*6+4)+'s;--tx:'+(Math.random()*200-100)+'px;--ty:'+(Math.random()*200-100)+'px;--tx2:'+(Math.random()*200-100)+'px;--ty2:'+(Math.random()*200-100)+'px;animation-delay:'+Math.random()*5+'s';
-    document.body.appendChild(f)}
-})();
+  // ===== 전역 변수 =====
+  var J = [];
+  var prevChoice = {};
+  var skippedCafe = false;
+  var TOTAL = 8;
 
-// ===== 상태 =====
-var J=[];
-var prev='';
-var skippedCafe=false;
+  // ===== 별 생성 =====
+  var starBox = document.getElementById('stars');
+  for(var i=0;i<70;i++){
+    var s=document.createElement('div');
+    s.className='star';
+    var sz=Math.random()*2+1;
+    s.style.cssText='width:'+sz+'px;height:'+sz+'px;top:'+Math.random()*100+'%;left:'+Math.random()*100+'%;opacity:'+(Math.random()*.5+.3)+';-webkit-animation:twinkle '+(Math.random()*3+2)+'s ease-in-out infinite;animation:twinkle '+(Math.random()*3+2)+'s ease-in-out infinite;-webkit-animation-delay:'+Math.random()*3+'s;animation-delay:'+Math.random()*3+'s;';
+    starBox.appendChild(s);
+  }
+  // 반딧불
+  for(var i=0;i<6;i++){
+    var f=document.createElement('div');
+    f.className='ff';
+    var fSz=Math.random()*4+3;
+    f.style.cssText='width:'+fSz+'px;height:'+fSz+'px;top:'+Math.random()*100+'%;left:'+Math.random()*100+'%;background:rgba(255,215,0,'+(Math.random()*.3+.2)+');box-shadow:0 0 '+(fSz*2)+'px rgba(255,215,0,.3);-webkit-animation-delay:'+Math.random()*4+'s;animation-delay:'+Math.random()*4+'s;-webkit-animation-duration:'+(Math.random()*4+4)+'s;animation-duration:'+(Math.random()*4+4)+'s;';
+    document.body.appendChild(f);
+  }
 
-function prog(n){document.getElementById('pb').style.width=(n/8)*100+'%'}
-function R(h){document.getElementById('gc').innerHTML='<div class="card">'+h+'</div>';window.scrollTo(0,0)}
-function flip(el){if(el.classList.contains('flipped')){el.classList.remove('flipped')}else{el.classList.add('flipped')}}
+  // ===== 유틸 =====
+  var app = document.getElementById('app');
+  function prog(n){document.getElementById('progBar').style.width=(n/TOTAL*100)+'%';}
+  function render(h){app.innerHTML=h;window.scrollTo(0,0);}
+  function scrollDown(){setTimeout(function(){window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});},100);}
 
-function makeCard(num,frontEmoji,backIcon,backDesc,onSelect,delay){
-    var labels=['','I','II','III','IV','V','VI'];
-    var dl=delay||0;
-    return '<div class="flip-card" onclick="flip(this)">'+
-        '<div class="flip-inner">'+
-            '<div class="flip-front">'+
-                '<div class="front-shimmer" style="-webkit-animation-delay:'+dl+'s;animation-delay:'+dl+'s"></div>'+
-                '<div class="front-deco"><span class="deco-icon">✦</span></div>'+
-                '<div class="front-mystery">?</div>'+
-                '<div class="front-label">CARD '+(labels[num]||num)+'</div>'+
-            '</div>'+
-            '<div class="flip-back">'+
-                '<div class="back-line"></div>'+
-                '<div class="back-icon">'+backIcon+'</div>'+
-                '<div class="back-desc">'+backDesc+'</div>'+
-                '<div class="back-line"></div>'+
-                '<button class="select-btn" onclick="event.stopPropagation();'+onSelect+'">여기로 갈래!</button>'+
-            '</div>'+
+  // 카드 만들기
+  var cardNums = ['Ⅰ','Ⅱ','Ⅲ','Ⅳ'];
+  function makeCard(idx,emoji,backIcon,backDesc,delay){
+    return '<div class="fc" data-idx="'+idx+'" style="-webkit-animation-delay:'+delay+'s;animation-delay:'+delay+'s;">'+
+      '<div class="fi">'+
+        '<div class="ff2">'+
+          '<div class="front-shimmer"></div>'+
+          '<div class="diamond"><span class="di">✦</span></div>'+
+          '<div class="fl">MAGIC CARD</div>'+
+          '<div class="fm">'+cardNums[idx]+'</div>'+
         '</div>'+
+        '<div class="fb">'+
+          '<div class="bl"></div>'+
+          '<div class="bi">'+backIcon+'</div>'+
+          '<div class="bd">'+backDesc+'</div>'+
+          '<div class="bl"></div>'+
+          '<button class="sb" data-pick="'+idx+'">여기로 갈래!</button>'+
+        '</div>'+
+      '</div>'+
     '</div>';
-}
+  }
 
-function prevMsg(stage){
-    var m={
-        3:{'아마 홍대점':'이국의 향신료 덕분에 몸이 따뜻해진','스니커즈 버거클럽':'버거로 에너지를 가득 채운','소금제면소':'바다의 마법 면을 먹고 개운해진','오레타치카레':'진한 마법 소스로 기운을 차린'},
-        4:{'_cafe':'하얀 정령들의 축복을 받은','_skip':''},
-        5:{'트릭아이 뮤지엄':'환영술을 배워 눈이 반짝이는','액티브 아레나':'결투 훈련으로 몸이 뜨거운','액티브모드':'빛의 마법으로 온몸이 빛나는'},
-        6:{'저스트단비':'달콤한 간식으로 행복해진','943 킹스크로스':'진짜 마법사 기분이 된'},
-        7:{'알페로':'근사한 만찬으로 배가 부른','두리반':'따뜻한 가정식으로 마음이 포근한','38도씨 식당':'별빛 파스타로 낭만 가득한','신선화로':'불꽃 고기로 에너지가 넘치는'}
-    };
-    if(!m[stage])return '';
-    if(stage===4){return skippedCafe?'':m[4]['_cafe']}
-    return m[stage][prev]||'';
-}
-
-// ===== 인트로 =====
-function intro(){
-    prog(0);
-    R(
-        '<div class="ct"><span class="em">🦉✉️</span>입학 허가증이 도착했어요!</div>'+
-        '<div class="tx">'+
-            '<span class="hl">옐미</span>에게,<br><br>'+
-            '축하해요! 당신은 <span class="hl">홍대 마법학교</span>에<br>'+
-            '정식으로 입학 허가되었습니다!<br><br>'+
-            '...그런데 부엉이가 길을 잃어서<br>'+
-            '이 편지가 좀 늦었대요. 미안하대. 🦉💦<br><br>'+
-            '<span class="hl">5월 22일</span>, 모험이 시작됩니다.<br>'+
-            '준비됐죠?'+
-        '</div>'+
-        '<button class="btn" onclick="s1()">📜 입학허가증 펼치기</button>'
-    );
-}
-
-// ===== Ch.1 무인공방 (가짜선택) =====
-function s1(){
-    prog(1);
-    R(
-        '<div class="si">✦ CHAPTER 1 ✦</div>'+
-        '<div class="ct"><span class="em">🧪</span>마법 물약 수업</div>'+
-        '<div class="tx">'+
-            '입학 첫날, 모든 신입생은<br>'+
-            '<span class="hl">마법 물약 조제 수업</span>을 들어야 해요.<br><br>'+
-            '교수님이 말했어요.<br>'+
-            '"오늘은 특별한 물약을 직접 만들어볼 거예요.<br>'+
-            '두 가지 과정 중 하나를 선택하세요."<br><br>'+
-            '책상 위에 두 장의 카드가 놓여있어요.'+
-        '</div>'+
-        '<div class="flip-grid">'+
-            makeCard(1,'✦','🧪','비밀 레시피로<br>나만의 <strong>마법 물약</strong>을<br>조제해보는 수업','s1r("potion")',0)+
-            makeCard(2,'✦','⚗️','금지된 <strong>엘릭서</strong>를<br>연금술로 빚어보는<br>비밀 수업','s1r("elixir")',.5)+
-        '</div>'+
-        '<div class="select-hint">카드를 눌러 뒤집어보세요!</div>'
-    );
-}
-
-function s1r(type){
-    J.push({stage:1,place:'무인공방',label:'🧪 물약수업'});prev='무인공방';
-    var tx=type==='potion'
-        ?'옐미가 과일과 꽃을 조심조심 섞자<br>병 속에서 신비한 빛이 피어올라요!<br><br>"오오... 이 색깔은 대성공이에요!"<br>교수님이 엄지를 치켜세웠어요. 👍✨'
-        :'옐미가 비밀 재료를 한 방울 떨어뜨리자<br>황금빛 기운이 병을 감싸요!<br><br>"이런 엘릭서는 처음 봐요...!"<br>교수님이 감탄했어요. 🫢✨';
-    R(
-        '<div class="re">🧪✨</div><div class="rt">마법 물약 조제 실습!</div>'+
-        '<div class="rp">📍 무인공방</div>'+
-        '<div class="rx">'+tx+'<br><br><em>옐미만의 특별한 물약이 완성되었습니다!</em></div>'+
-        '<button class="btn" onclick="s2()">✨ 다음 모험으로!</button>'
-    );
-}
-
-// ===== Ch.2 점심 (진짜선택 4장) =====
-function s2(){
-    prog(2);
-    R(
-        '<div class="si">✦ CHAPTER 2 ✦</div>'+
-        '<div class="ct"><span class="em">🍽️</span>마법학교 대식당</div>'+
-        '<div class="tx">'+
-            '물약 수업을 마치니 배에서 꼬르륵~ 🫢<br><br>'+
-            '마법학교 대식당에 도착했더니<br>'+
-            '<span class="hl">네 기숙사</span>에서 각각 다른 요리를 준비했대요!<br><br>'+
-            '테이블 위에 네 장의 카드가 놓여 있어요.'+
-        '</div>'+
-        '<div class="flip-grid">'+
-            makeCard(1,'✦','🏰','이국의 향신료가 가득한<br>신비로운 연회장<br>코끝을 간지럽히는 향기...','s2r(\'아마 홍대점\')',0)+
-            makeCard(2,'✦','🔥','화덕 위에서 육즙이<br>지글지글 타오르는 식당<br>에너지 충전 보장!','s2r(\'스니커즈 버거클럽\')',.4)+
-            makeCard(3,'✦','🌊','바다의 소금으로<br>면을 뽑는 마법사의 공방<br>면 후루룩 소리가 들려와~','s2r(\'소금제면소\')',.8)+
-            makeCard(4,'✦','⚡','동쪽 탑에서 은밀하게 끓이는<br>진하고 깊은 마법의 소스<br>비밀 주방의 맛이 궁금해!','s2r(\'오레타치카레\')',1.2)+
-        '</div>'+
-        '<div class="select-hint">카드를 눌러 뒤집어보세요!</div>'
-    );
-}
-
-function s2r(place){
-    J.push({stage:2,place:place,label:'🍽️ 점심'});prev=place;
-    var D={
-        '아마 홍대점':{em:'🏰✨',ti:'이국의 마법사 연회장!',tx:'이국의 향신료가 옐미를 감싸요.<br>한 숟갈 뜨는 순간, 입안에서 마법이 펼쳐져요!<br><br>"이건... 먼 나라의 궁전에서나 맛볼 수 있는 맛이야!"<br>옐미의 눈이 동그래졌어요. 👀✨'},
-        '스니커즈 버거클럽':{em:'🔥✨',ti:'용사들의 화덕 식당!',tx:'화덕에서 꺼낸 버거를 한 입 베어무는 순간!<br>육즙이 퍼지며 에너지가 차올라요!<br><br>"이 정도면 드래곤도 잡을 수 있겠는걸?!"<br>옐미가 주먹을 불끈 쥐었어요. 💪🔥'},
-        '소금제면소':{em:'🌊✨',ti:'소금 마법사의 면 공방!',tx:'바다의 정수로 뽑은 면을 후루룩—<br>국물 한 모금에 온몸이 개운해져요!<br><br>"면이... 면이 빛나고 있어?!"<br>소금 결정이 반짝이는 건 비밀이에요. 🤫✨'},
-        '오레타치카레':{em:'⚡✨',ti:'동쪽 탑의 비밀 주방!',tx:'진하고 깊은 마법의 소스를 한 숟갈...<br>온몸에 따뜻한 기운이 퍼져나가요!<br><br>"이 맛은... 비전서에 기록해야 해!"<br>옐미가 감동의 눈물을 글썽여요. 🥺✨'}
-    };
-    var d=D[place];
-    R('<div class="re">'+d.em+'</div><div class="rt">'+d.ti+'</div><div class="rp">📍 '+place+'</div><div class="rx">'+d.tx+'</div><button class="btn" onclick="s3()">✨ 다음 모험으로!</button>');
-}
-
-// ===== Ch.3 애견카페 (가자/안갈래) =====
-function s3(){
-    prog(3);
-    var pm=prevMsg(3);
-    R(
-        '<div class="si">✦ CHAPTER 3 ✦</div>'+
-        '<div class="ct"><span class="em">🐾</span>마법 생물학 수업</div>'+
-        '<div class="tx">'+(pm?pm+' 옐미!<br><br>':'')+
-            '배도 부르고 행복한데,<br>'+
-            '다음 수업 알림이 울렸어요! 🔔<br><br>'+
-            '"오후 수업은 <span class="hl">마법 생물학</span>입니다.<br>'+
-            '오늘은 전설의 마법 생물<br>'+
-            '<span class="hl">하얀 눈의 정령</span>들을 만날 수 있어요."<br><br>'+
-            '옐미 앞에 두 장의 카드가 나타났어요.'+
-        '</div>'+
-        '<div class="flip-grid">'+
-            makeCard(1,'✦','🐶','하얀 정령들이<br>꼬리를 흔들며<br>기다리고 있어요!<br><strong>만나러 가자!</strong>','s3r(true)',0)+
-            makeCard(2,'✦','👋','정령들은 다음에 만나자!<br>지금은 다른 수업이<br>기다리고 있어!<br><strong>다음에 갈게~</strong>','s3r(false)',.5)+
-        '</div>'+
-        '<div class="select-hint">카드를 눌러 뒤집어보세요!</div>'
-    );
-}
-
-function s3r(go){
-    if(go){
-        skippedCafe=false;
-        J.push({stage:3,place:'애견카페 겨울이 머무는 집',label:'🐾 마법생물'});
-        R(
-            '<div class="re">🐶✨</div><div class="rt">하얀 눈의 정령 등장!</div>'+
-            '<div class="rp">📍 애견카페 겨울이 머무는 집</div>'+
-            '<div class="rx">'+
-                '문을 여는 순간, 하얀 솜뭉치들이<br>'+
-                '와르르 달려와 옐미에게 점프했어요!<br><br>'+
-                '"꺄아아! 너무 귀여워어어!"<br>'+
-                '옐미가 정령들에게 파묻혔어요. 🐾💕<br><br>'+
-                '<em>정령들이 옐미의 마음을 완전히 사로잡았어요!</em>'+
-            '</div>'+
-            '<button class="btn" onclick="s4()">✨ 다음 모험으로!</button>'
-        );
-    }else{
-        skippedCafe=true;
-        R(
-            '<div class="re">👋✨</div><div class="rt">다음에 꼭 만나자!</div>'+
-            '<div class="rx">'+
-                '옐미는 정령들에게 손을 흔들어<br>'+
-                '인사를 보냈어요.<br><br>'+
-                '저 멀리서 하얀 꼬리가 흔들리는 게<br>'+
-                '살짝 보였어요... 아쉽지만!<br><br>'+
-                '<em>다음 모험이 옐미를 기다리고 있어요!</em>'+
-            '</div>'+
-            '<button class="btn" onclick="s4()">✨ 다음 모험으로!</button>'
-        );
+  // 플립 이벤트 바인딩
+  function bindFlips(containerId, onPick){
+    var container = document.getElementById(containerId);
+    if(!container) return;
+    var cards = container.getElementsByClassName('fc');
+    for(var i=0;i<cards.length;i++){
+      (function(card){
+        card.addEventListener('click',function(e){
+          // 버튼 클릭은 무시 (버튼 자체 핸들러에서 처리)
+          if(e.target && (e.target.className==='sb' || e.target.getAttribute('data-pick')!==null)){
+            return;
+          }
+          if(card.className.indexOf('flipped')===-1){
+            card.className+=' flipped';
+          }
+        },false);
+      })(cards[i]);
     }
-}
+    // 버튼 이벤트
+    var btns = container.getElementsByClassName('sb');
+    for(var j=0;j<btns.length;j++){
+      (function(btn){
+        btn.addEventListener('click',function(e){
+          e.stopPropagation();
+          e.preventDefault();
+          var pickIdx = parseInt(btn.getAttribute('data-pick'));
+          onPick(pickIdx);
+        },false);
+        // 터치 이벤트도 추가 (카카오톡 인앱 대응)
+        btn.addEventListener('touchend',function(e){
+          e.stopPropagation();
+          e.preventDefault();
+          var pickIdx = parseInt(btn.getAttribute('data-pick'));
+          onPick(pickIdx);
+        },false);
+      })(btns[j]);
+    }
+  }
 
-// ===== Ch.4 액티비티 (진짜선택 3장) =====
-function s4(){
+  // 일반 버튼 바인딩
+  function bindBtn(id,fn){
+    var b=document.getElementById(id);
+    if(!b)return;
+    b.addEventListener('click',function(e){e.preventDefault();fn();},false);
+    b.addEventListener('touchend',function(e){e.preventDefault();fn();},false);
+  }
+
+  // 결과 표시
+  function showResult(containerId, icon, title, desc, place, nextFn){
+    var c=document.getElementById(containerId);
+    if(!c)return;
+    var rDiv=document.createElement('div');
+    rDiv.className='result';
+    rDiv.innerHTML='<div class="ri">'+icon+'</div><div class="rt">'+title+'</div><div class="rd">'+desc+'</div><div class="rp">📍 '+place+'</div><div class="btnWrap"><button class="btn" id="nextBtn">다음으로 →</button></div>';
+    c.appendChild(rDiv);
+    scrollDown();
+    setTimeout(function(){
+      bindBtn('nextBtn',nextFn);
+    },100);
+  }
+
+  // ===== prevChoice 반영 멘트 =====
+  function getPrev(stage){
+    if(stage==='lunch' && prevChoice.workshop){
+      if(prevChoice.workshop===0) return '물약 조제에 온 힘을 쏟았더니 배에서 꼬르륵 소리가...';
+      return '연금술에 집중했더니 어느새 점심시간이 지나버렸어요!';
+    }
+    if(stage==='cafe' && prevChoice.lunch!==undefined){
+      var lNames=['이국의 향신료','화덕 육즙','바다 소금 면','비밀 마법 소스'];
+      return lNames[prevChoice.lunch]+' 연회의 여운이 아직 남아있네요...';
+    }
+    if(stage==='activity'){
+      if(skippedCafe) return '정령들에게 손을 흔들어 인사만 하고 다음 수업으로 향했어요.';
+      return '정령들의 축복을 받으니 온몸에 에너지가 넘쳐요!';
+    }
+    if(stage==='cafe2' && prevChoice.activity!==undefined){
+      var aNames=['환영술 수업','결투 훈련','빛의 시험'];
+      return aNames[prevChoice.activity]+'을 마치니 달콤한 게 간절해졌어요...';
+    }
+    if(stage==='dinner' && prevChoice.cafe2!==undefined){
+      var cNames=['비밀 아지트의 크레페','마법사 라운지의 버터비어'];
+      return cNames[prevChoice.cafe2]+'의 여운이 남아있지만, 이제 진짜 배고파요!';
+    }
+    if(stage==='bar' && prevChoice.dinner!==undefined){
+      var dNames=['숲속 정원','100년 가정식','별빛 파스타','전설의 화로'];
+      return dNames[prevChoice.dinner]+' 만찬이 끝나고, 밤이 깊어져요...';
+    }
+    return '';
+  }
+
+  // =============================================
+  //   인트로
+  // =============================================
+  function intro(){
+    prog(0);
+    render(
+      '<div class="card">'+
+        '<div style="text-align:center;font-size:48px;margin-bottom:12px;">🦉</div>'+
+        '<div class="ttl" style="text-align:center;">부엉이 한 마리가<br>편지를 물고 왔어요</div>'+
+        '<div class="txt" style="text-align:center;">'+
+          '"옐미 님께,<br><br>'+
+          '당신은 홍대 마법학교에<br>입학이 허가되었습니다.<br><br>'+
+          '5월 22일, 마법의 하루가<br>당신을 기다리고 있어요."<br><br>'+
+          '<span style="color:#ffd700;">— 홍대 마법학교 교장 드림 🧙‍♂️</span>'+
+        '</div>'+
+        '<div class="btnWrap"><button class="btn" id="startBtn">✨ 입학허가증 펼치기</button></div>'+
+      '</div>'
+    );
+    bindBtn('startBtn',s1);
+  }
+
+  // =============================================
+  //  CH.1 무인공방 (가짜선택 2장)
+  // =============================================
+  function s1(){
+    prog(1);
+    render(
+      '<div class="card">'+
+        '<div class="chap">CHAPTER 1</div>'+
+        '<div class="ttl">🧪 첫 번째 수업 — 마법 조제실</div>'+
+        '<div class="txt">마법학교에 도착하니 교수님이 기다리고 있어요.<br><br>'+
+          '"오늘 첫 수업은 직접 마법의 액체를 만드는 거란다. 어떤 방식으로 만들어볼까?"</div>'+
+        '<div class="grid" id="s1grid">'+
+          makeCard(0,'✦','🧪','과일과 꽃의 정수를 섞어<br>비밀 레시피의 <b>마법 물약</b>을<br>조제해보자',0)+
+          makeCard(1,'✦','⚗️','고대 연금술 기법으로<br>금빛 <b>엘릭서</b>를<br>빚어보자',0.1)+
+        '</div>'+
+      '</div>'
+    );
+    bindFlips('s1grid',function(idx){
+      prevChoice.workshop=idx;
+      var resultIcon=idx===0?'🧪':'⚗️';
+      var resultTitle=idx===0?'마법 물약 완성!':'황금 엘릭서 완성!';
+      var resultDesc=idx===0
+        ?'옐미가 조심조심 재료를 섞자,<br>병 속에서 신비한 빛이 피어올라요!'
+        :'옐미가 비밀 재료를 한 방울 떨어뜨리자,<br>황금빛 기운이 감돌아요!';
+      J.push({emoji:resultIcon,label:resultTitle,place:'무인공방'});
+      showResult('s1grid',resultIcon,resultTitle,resultDesc,'무인공방 (담금주 만들기)',s2);
+    });
+  }
+
+  // =============================================
+  //  CH.2 점심 (진짜선택 4장)
+  // =============================================
+  function s2(){
+    prog(2);
+    var p=getPrev('lunch');
+    render(
+      '<div class="card">'+
+        '<div class="chap">CHAPTER 2</div>'+
+        '<div class="ttl">🍽️ 마법사의 연회</div>'+
+        (p?'<div class="prev">'+p+'</div>':'')+
+        '<div class="txt">교수님이 말했어요.<br><br>"점심시간이다! 마법학교에는 네 개의 연회장이 있단다. 카드를 뒤집어 마음에 드는 곳을 골라보렴."</div>'+
+        '<div class="grid" id="s2grid">'+
+          makeCard(0,'✦','🏰','이국의 향신료가 가득한<br><b>신비의 연회장</b>',0)+
+          makeCard(1,'✦','🔥','화덕에서 구운 육즙 넘치는<br><b>화염의 연회장</b>',0.1)+
+          makeCard(2,'✦','🌊','바다 소금으로 빚은<br><b>파도의 연회장</b>',0.2)+
+          makeCard(3,'✦','⚡','비밀 마법 소스가 흐르는<br><b>번개의 연회장</b>',0.3)+
+        '</div>'+
+      '</div>'
+    );
+    var lunchPlaces=['아마 홍대점','스니커즈 버거클럽','소금제면소','오레타치카레'];
+    var lunchIcons=['🏰','🔥','🌊','⚡'];
+    var lunchTitles=['신비의 연회장','화염의 연회장','파도의 연회장','번개의 연회장'];
+    var lunchDescs=[
+      '이국적인 향신료와 마법의 양념이 어우러진<br>신비로운 요리가 펼쳐져요!',
+      '마법의 화덕에서 구워낸<br>육즙 가득한 요리가 기다려요!',
+      '바다의 소금과 정성으로 빚어낸<br>면 요리가 출렁여요!',
+      '비밀 소스의 마법이 깃든<br>강렬한 맛의 세계가 펼쳐져요!'
+    ];
+    bindFlips('s2grid',function(idx){
+      prevChoice.lunch=idx;
+      J.push({emoji:lunchIcons[idx],label:lunchTitles[idx],place:lunchPlaces[idx]});
+      showResult('s2grid',lunchIcons[idx],lunchTitles[idx],lunchDescs[idx],lunchPlaces[idx],s3);
+    });
+  }
+
+  // =============================================
+  //  CH.3 애견카페 (가자/안갈래)
+  // =============================================
+  function s3(){
+    prog(3);
+    var p=getPrev('cafe');
+    render(
+      '<div class="card">'+
+        '<div class="chap">CHAPTER 3</div>'+
+        '<div class="ttl">❄️ 하얀 정령의 숲</div>'+
+        (p?'<div class="prev">'+p+'</div>':'')+
+        '<div class="txt">식사를 마치고 걷다 보니, 골목 끝에서 하얀 빛이 새어나와요.<br><br>'+
+          '"저 안에는 전설의 하얀 정령들이 살고 있대. 만나러 가볼까?"</div>'+
+        '<div class="grid" id="s3grid">'+
+          makeCard(0,'✦','🐾','하얀 정령들을<br><b>만나러 가자!</b><br>🐶❄️',0)+
+          makeCard(1,'✦','👋','오늘은<br><b>다음에 만나자</b>고<br>인사만 할래',0.1)+
+        '</div>'+
+      '</div>'
+    );
+    bindFlips('s3grid',function(idx){
+      if(idx===0){
+        skippedCafe=false;
+        J.push({emoji:'❄️',label:'하얀 정령의 숲',place:'겨울이 머무는 집'});
+        showResult('s3grid','❄️','하얀 정령을 만났다!','하얀 솜뭉치 정령들이 와르르 달려와<br>옐미에게 안겨요! 따뜻하고 복슬복슬...','겨울이 머무는 집 (애견카페)',s4);
+      } else {
+        skippedCafe=true;
+        // 건너뛰기 - 결과 없이 바로 다음으로
+        var skipDiv=document.createElement('div');
+        skipDiv.className='result';
+        skipDiv.innerHTML='<div class="ri">👋</div><div class="rt">다음에 꼭 만나자!</div><div class="rd">옐미는 하얀 정령들에게 손을 흔들며<br>다음 수업을 향해 걸어갔어요.</div><div class="btnWrap"><button class="btn" id="skipBtn">다음으로 →</button></div>';
+        document.getElementById('s3grid').appendChild(skipDiv);
+        scrollDown();
+        setTimeout(function(){bindBtn('skipBtn',s4);},100);
+      }
+    });
+  }
+
+  // =============================================
+  //  CH.4 액티비티 (진짜선택 3장)
+  // =============================================
+  function s4(){
     prog(4);
-    var pm=prevMsg(4);
-    R(
-        '<div class="si">✦ CHAPTER 4 ✦</div>'+
-        '<div class="ct"><span class="em">⚔️</span>방과 후 특별활동</div>'+
-        '<div class="tx">'+(pm?pm+' 옐미!<br><br>':'')+
-            '교수님이 다가와서 말했어요.<br><br>'+
-            '"신입생은 <span class="hl">방과 후 특별활동</span>을<br>'+
-            '하나 선택해야 합니다!"<br><br>'+
-            '게시판에 세 장의 카드가 붙어 있어요!'+
+    var p=getPrev('activity');
+    render(
+      '<div class="card">'+
+        '<div class="chap">CHAPTER 4</div>'+
+        '<div class="ttl">⚔️ 오후 특별 수업</div>'+
+        (p?'<div class="prev">'+p+'</div>':'')+
+        '<div class="txt">오후에는 실전 수업이 기다리고 있어요!<br><br>"세 가지 특별 수업 중 하나를 골라보렴. 어떤 마법을 익히고 싶니?"</div>'+
+        '<div class="grid" id="s4grid">'+
+          makeCard(0,'✦','🎨','눈을 속이는<br><b>환영술 수업</b><br>에 참가하자',0)+
+          makeCard(1,'✦','🏹','몸을 단련하는<br><b>결투 훈련장</b><br>에서 싸워보자',0.1)+
+          makeCard(2,'✦','💡','빛으로 승부하는<br><b>빛의 시험장</b><br>에 도전하자',0.2)+
         '</div>'+
-        '<div class="flip-grid">'+
-            makeCard(1,'✦','🎨','눈앞의 것이 진짜? 가짜?<br>현실과 환상의 경계를 넘는<br><strong>환영술 연구실</strong>','s4r(\'트릭아이 뮤지엄\')',0)+
-            makeCard(2,'✦','🏹','몸으로 부딪히며<br>마법을 겨루는<br><strong>마법 결투 훈련장</strong>','s4r(\'액티브 아레나\')',.4)+
-            makeCard(3,'✦','💡','발밑에서 빛이 폭발한다!<br>온몸으로 빛을 다루는<br><strong>빛의 마법 시험장</strong>','s4r(\'액티브모드\')',.8)+
-        '</div>'+
-        '<div class="select-hint">카드를 눌러 뒤집어보세요!</div>'
+      '</div>'
     );
-}
+    var actPlaces=['트릭아이 뮤지엄','액티브 아레나','액티브모드'];
+    var actIcons=['🎨','🏹','💡'];
+    var actTitles=['환영술 마스터!','결투 훈련 완료!','빛의 시험 통과!'];
+    var actDescs=[
+      '눈앞의 세계가 뒤집히고 돌아가고...<br>어디까지가 진짜일까? 환영술의 세계!',
+      '땀을 흘리며 마법 결투를 마쳤어요!<br>옐미의 전투력이 크게 올랐다!',
+      '눈부신 빛 속에서 반사신경을 겨루었어요!<br>옐미의 감각이 한층 날카로워졌다!'
+    ];
+    bindFlips('s4grid',function(idx){
+      prevChoice.activity=idx;
+      J.push({emoji:actIcons[idx],label:actTitles[idx],place:actPlaces[idx]});
+      showResult('s4grid',actIcons[idx],actTitles[idx],actDescs[idx],actPlaces[idx],s5);
+    });
+  }
 
-function s4r(place){
-    J.push({stage:4,place:place,label:'⚔️ 특별활동'});prev=place;
-    var D={
-        '트릭아이 뮤지엄':{em:'🎨✨',ti:'환영술 연구실 입장!',tx:'벽이 움직이고, 바닥이 사라지고...<br>모든 것이 착각! 아닌가?! 진짜인가?!<br><br>"여기가 위고 여기가 아래... 아 모르겠다!"<br>옐미가 어지러워하면서도 깔깔 웃어요. 😂✨'},
-        '액티브 아레나':{em:'🏹✨',ti:'마법 결투 시작!',tx:'레이저가 번쩍! 미션이 시작됐어요!<br>이리 뛰고 저리 숨고, 심장이 쿵쿵!<br><br>"잠깐! 저기! 뒤에 있어!"<br>옐미가 전사처럼 뛰어다녀요! 🏃‍♀️💨'},
-        '액티브모드':{em:'💡✨',ti:'빛의 마법 시험!',tx:'바닥에서 빛이 번쩍번쩍!<br>색깔을 밟으며 점수가 올라가요!<br><br>"저거 밟아! 아 저거! 빨리!"<br>옐미가 폴짝폴짝 뛰어다녀요! 🦘✨'}
-    };
-    var d=D[place];
-    R('<div class="re">'+d.em+'</div><div class="rt">'+d.ti+'</div><div class="rp">📍 '+place+'</div><div class="rx">'+d.tx+'</div><button class="btn" onclick="s5()">✨ 다음 모험으로!</button>');
-}
-
-// ===== Ch.5 카페 (진짜선택 2장) =====
-function s5(){
+  // =============================================
+  //  CH.5 카페 (진짜선택 2장)
+  // =============================================
+  function s5(){
     prog(5);
-    var pm=prevMsg(5);
-    R(
-        '<div class="si">✦ CHAPTER 5 ✦</div>'+
-        '<div class="ct"><span class="em">☕</span>비밀의 휴게실</div>'+
-        '<div class="tx">'+(pm?pm+' 옐미!<br><br>':'')+
-            '특별활동까지 끝내니 슬슬 지칠 때...<br><br>'+
-            '선배가 귓속말로 말해요.<br>'+
-            '"<span class="hl">옐미</span>야, 학교에<br>'+
-            '<span class="hl">비밀 휴게실</span>이 있는 거 알아?"<br><br>'+
-            '선배가 건넨 카드 두 장... 어디로 갈까?'+
+    var p=getPrev('cafe2');
+    render(
+      '<div class="card">'+
+        '<div class="chap">CHAPTER 5</div>'+
+        '<div class="ttl">☕ 비밀의 휴식처</div>'+
+        (p?'<div class="prev">'+p+'</div>':'')+
+        '<div class="txt">수업이 끝나고 달콤한 휴식이 필요해요.<br><br>"학교 뒷골목에 숨겨진 두 곳의 비밀 아지트가 있단다..."</div>'+
+        '<div class="grid" id="s5grid">'+
+          makeCard(0,'✦','🧁','달콤한 크레페가 있는<br><b>요정의 비밀 아지트</b>',0)+
+          makeCard(1,'✦','🧙','마법사만 출입 가능한<br><b>전설의 라운지</b>',0.1)+
         '</div>'+
-        '<div class="flip-grid">'+
-            makeCard(1,'✦','🧁','달콤한 향기가 솔솔~<br>간식이 저절로 나타나는<br><strong>달콤한 마법사의 은신처</strong>','s5r(\'저스트단비\')',0)+
-            makeCard(2,'✦','🧙','마법사 로브를 걸칠 수 있는<br>전설의 라운지<br><strong>마법사의 비밀 공간</strong>','s5r(\'943 킹스크로스\')',.5)+
-        '</div>'+
-        '<div class="select-hint">카드를 눌러 뒤집어보세요!</div>'
+      '</div>'
     );
-}
+    var cafePlaces=['저스트단비','943 킹스크로스'];
+    var cafeIcons=['🧁','🧙'];
+    var cafeTitles=['요정의 아지트 발견!','전설의 라운지 입장!'];
+    var cafeDescs=[
+      '달콤한 크레페와 함께<br>마법처럼 편안한 시간이 흘러가요...',
+      '마법사 전용 라운지에 들어서니<br>버터비어 향이 코끝을 간질여요!'
+    ];
+    bindFlips('s5grid',function(idx){
+      prevChoice.cafe2=idx;
+      J.push({emoji:cafeIcons[idx],label:cafeTitles[idx],place:cafePlaces[idx]});
+      showResult('s5grid',cafeIcons[idx],cafeTitles[idx],cafeDescs[idx],cafePlaces[idx],s6);
+    });
+  }
 
-function s5r(place){
-    J.push({stage:5,place:place,label:'☕ 휴게실'});prev=place;
-    var D={
-        '저스트단비':{em:'🧁✨',ti:'달콤한 마법사의 은신처!',tx:'크레페 위에 크림이 사르르~<br>한 입 베어무는 순간 피로가 녹아내려요!<br><br>"이건... 힐링 마법이야...!"<br>옐미가 눈을 감고 행복에 잠겨요. 😌💕'},
-        '943 킹스크로스':{em:'🧙✨',ti:'전설의 마법사 라운지!',tx:'로브를 걸치는 순간, 거울 속의 옐미가<br>진짜 마법사처럼 보여요!<br><br>"어머... 나 완전 마법사잖아?!"<br>옐미가 지팡이를 휘두르며 포즈를 잡아요. 🪄📸'}
-    };
-    var d=D[place];
-    R('<div class="re">'+d.em+'</div><div class="rt">'+d.ti+'</div><div class="rp">📍 '+place+'</div><div class="rx">'+d.tx+'</div><button class="btn" onclick="s6()">✨ 다음 모험으로!</button>');
-}
-
-// ===== Ch.6 저녁 (진짜선택 4장) =====
-function s6(){
+  // =============================================
+  //  CH.6 저녁 (진짜선택 4장)
+  // =============================================
+  function s6(){
     prog(6);
-    var pm=prevMsg(6);
-    R(
-        '<div class="si">✦ CHAPTER 6 ✦</div>'+
-        '<div class="ct"><span class="em">🌙</span>저녁의 만찬</div>'+
-        '<div class="tx">'+(pm?pm+' 옐미!<br><br>':'')+
-            '해가 지고 마법학교 하늘에<br>'+
-            '<span class="hl">보라빛 달</span>이 떠올랐어요. 🌙<br><br>'+
-            '오늘은 신입생 환영 만찬!<br>'+
-            '학교 밖 네 곳의 <span class="hl">비밀 레스토랑</span>에서<br>'+
-            '초대장이 날아왔어요. 💌'+
+    var p=getPrev('dinner');
+    render(
+      '<div class="card">'+
+        '<div class="chap">CHAPTER 6</div>'+
+        '<div class="ttl">🌙 마법사의 만찬</div>'+
+        (p?'<div class="prev">'+p+'</div>':'')+
+        '<div class="txt">해가 지고, 마법학교에 은은한 불빛이 켜져요.<br><br>"오늘 하루의 마지막 대연회야. 네 개의 만찬장 중 하나를 골라보렴!"</div>'+
+        '<div class="grid" id="s6grid">'+
+          makeCard(0,'✦','🌿','숲속 정원에서 즐기는<br><b>스테이크 만찬</b>',0)+
+          makeCard(1,'✦','🏠','100년 된 마법사 집의<br><b>따뜻한 가정식</b>',0.1)+
+          makeCard(2,'✦','🌟','별빛 아래 빛나는<br><b>파스타 비스트로</b>',0.2)+
+          makeCard(3,'✦','🔥','전설의 화로에서 구운<br><b>마법의 고기 연회</b>',0.3)+
         '</div>'+
-        '<div class="flip-grid">'+
-            makeCard(1,'✦','🌿','숲속 정원에서<br>촛불이 일렁이고<br>은은한 향의 <strong>스테이크</strong>가 기다려요','s6r(\'알페로\')',0)+
-            makeCard(2,'✦','🏠','100년 된 마법사의 오래된 집<br>정성 가득한<br><strong>따끈한 가정식</strong>이 차려져 있어요','s6r(\'두리반\')',.4)+
-            makeCard(3,'✦','🌟','별빛이 쏟아지는 아늑한 다락방<br>분위기 있는<br><strong>파스타와 와인</strong>이 기다려요','s6r(\'38도씨 식당\')',.8)+
-            makeCard(4,'✦','🔥','불의 마법사가 직접<br>화로에서 구워주는<br><strong>전설의 불꽃 고기</strong>','s6r(\'신선화로\')',1.2)+
-        '</div>'+
-        '<div class="select-hint">카드를 눌러 뒤집어보세요!</div>'
+      '</div>'
     );
-}
+    var dinPlaces=['알페로','두리반','38도씨 식당','신선화로'];
+    var dinIcons=['🌿','🏠','🌟','🔥'];
+    var dinTitles=['숲속 정원의 만찬!','마법사 가정식!','별빛 파스타!','전설 화로의 연회!'];
+    var dinDescs=[
+      '숲속 정원의 은은한 불빛 아래,<br>완벽하게 구워진 스테이크가 빛나요!',
+      '100년 된 레시피로 만든 따뜻한 가정식,<br>마음까지 포근해지는 맛이에요!',
+      '별빛이 내려앉은 접시 위에<br>마법의 파스타가 반짝여요!',
+      '전설의 화로에서 불꽃과 함께 구워낸<br>마법의 고기가 지글지글!'
+    ];
+    bindFlips('s6grid',function(idx){
+      prevChoice.dinner=idx;
+      J.push({emoji:dinIcons[idx],label:dinTitles[idx],place:dinPlaces[idx]});
+      showResult('s6grid',dinIcons[idx],dinTitles[idx],dinDescs[idx],dinPlaces[idx],s7);
+    });
+  }
 
-function s6r(place){
-    J.push({stage:6,place:place,label:'🌙 만찬'});prev=place;
-    var D={
-        '알페로':{em:'🌿✨',ti:'숲속의 마법사 만찬!',tx:'촛불이 일렁이는 숲속 정원...<br>스테이크를 자르자 육즙이 흘러내려요.<br><br>"이 분위기... 완전 영화 같아."<br>옐미의 눈에 촛불이 반짝여요. 🕯️✨'},
-        '두리반':{em:'🏠✨',ti:'옛 마법사의 가정식!',tx:'따끈한 칼국수 김이 모락모락~<br>한 젓가락 들자 온몸이 따뜻해져요.<br><br>"할머니 집에 온 것 같아... 여기 좋다."<br>옐미가 행복하게 호호 불며 먹어요. 🥰'},
-        '38도씨 식당':{em:'🌟✨',ti:'별빛 아래 비스트로!',tx:'다락방 창문으로 별빛이 쏟아져요.<br>파스타를 감는 포크에도 별이 반짝.<br><br>"여기 진짜 비밀장소 같아..."<br>옐미가 분위기에 푹 빠졌어요. 💫'},
-        '신선화로':{em:'🔥✨',ti:'불의 마법사 화로!',tx:'화로 위에서 고기가 지글지글!<br>불꽃이 춤추며 맛있는 냄새가 퍼져요.<br><br>"고기 앞에서는 마법사도 무릎을 꿇지."<br>옐미가 진지하게 고기를 굽고 있어요. 🥩🔥'}
-    };
-    var d=D[place];
-    R('<div class="re">'+d.em+'</div><div class="rt">'+d.ti+'</div><div class="rp">📍 '+place+'</div><div class="rx">'+d.tx+'</div><button class="btn" onclick="s7()">✨ 마지막 모험으로!</button>');
-}
-
-// ===== Ch.7 술집 (진짜선택 4장) =====
-function s7(){
+  // =============================================
+  //  CH.7 술집 (진짜선택 4장)
+  // =============================================
+  function s7(){
     prog(7);
-    var pm=prevMsg(7);
-    R(
-        '<div class="si">✦ FINAL CHAPTER ✦</div>'+
-        '<div class="ct"><span class="em">🌃</span>한밤의 비밀 모임</div>'+
-        '<div class="tx">'+(pm?pm+' 옐미!<br><br>':'')+
-            '만찬이 끝나고 밤이 깊어지자<br>'+
-            '책상 위에 <span class="hl">빛나는 쪽지</span>가 나타났어요.<br><br>'+
-            '<em>"자정이 다가오고 있어요.<br>'+
-            '마법학교의 진짜 밤은<br>'+
-            '지금부터 시작이에요. 🌙"</em><br><br>'+
-            '쪽지 아래 네 장의 카드가 숨겨져 있어요.'+
+    var p=getPrev('bar');
+    render(
+      '<div class="card">'+
+        '<div class="chap">CHAPTER 7 — FINAL</div>'+
+        '<div class="ttl">🌃 마법학교의 밤</div>'+
+        (p?'<div class="prev">'+p+'</div>':'')+
+        '<div class="txt">밤이 깊어지고 마법학교의 진짜 모습이 드러나요.<br><br>"오늘의 마지막 모험이야. 달빛 아래 네 곳의 비밀 장소가 열렸어..."</div>'+
+        '<div class="grid" id="s7grid">'+
+          makeCard(0,'✦','🏮','붉은 등불 아래 숨겨진<br><b>골목 포장마차</b>',0)+
+          makeCard(1,'✦','🍸','달빛 아래의<br><b>비밀 칵테일 연구소</b>',0.1)+
+          makeCard(2,'✦','🌃','별이 쏟아지는<br><b>하늘 위 비밀 장소</b>',0.2)+
+          makeCard(3,'✦','🎷','재즈 선율이 흐르는<br><b>달빛 무도회장</b>',0.3)+
         '</div>'+
-        '<div class="flip-grid">'+
-            makeCard(1,'✦','🏮','골목 끝에서 따뜻한 불빛이!<br>떠돌이 마법사가 운영하는<br><strong>불빛 가득한 포장마차</strong>','s7r(\'온달집\')',0)+
-            makeCard(2,'✦','🍸','지하로 내려가는 비밀 계단...<br>비밀결사가 운영하는<br><strong>칵테일 연구소</strong>','s7r(\'T12\')',.4)+
-            makeCard(3,'✦','🌃','옥상으로 올라가는 비밀 사다리!<br>밤하늘 아래<br><strong>마법사의 비밀 옥상</strong>','s7r(\'낭만포차\')',.8)+
-            makeCard(4,'✦','🎷','은은한 재즈 선율이 흘러나와요<br>소리를 따라가면 나타나는<br><strong>음유시인의 달빛 무대</strong>','s7r(\'클럽에반스\')',1.2)+
-        '</div>'+
-        '<div class="select-hint">카드를 눌러 뒤집어보세요!</div>'
+      '</div>'
     );
-}
+    var barPlaces=['온달집','T12','낭만포차','클럽에반스'];
+    var barIcons=['🏮','🍸','🌃','🎷'];
+    var barTitles=['골목 포장마차!','비밀 연구소!','하늘 위 비밀!','달빛 무도회!'];
+    var barDescs=[
+      '붉은 등불 아래에서<br>따뜻한 안주와 함께하는 마법의 밤!',
+      '비밀 연구소에서 조제한<br>신비로운 칵테일이 빛나요!',
+      '별이 쏟아지는 하늘 아래<br>로맨틱한 밤이 펼쳐져요!',
+      '재즈 선율에 몸을 맡기며<br>마법 같은 밤이 깊어져요!'
+    ];
+    bindFlips('s7grid',function(idx){
+      prevChoice.bar=idx;
+      J.push({emoji:barIcons[idx],label:barTitles[idx],place:barPlaces[idx]});
+      showResult('s7grid',barIcons[idx],barTitles[idx],barDescs[idx],barPlaces[idx],ending);
+    });
+  }
 
-function s7r(place){
-    J.push({stage:7,place:place,label:'🌃 비밀모임'});prev=place;
-    var D={
-        '온달집':{em:'🏮✨',ti:'떠돌이 마법사의 포차!',tx:'골목 불빛 아래, 닭다리가 지글지글!<br>떠돌이 마법사가 잔을 건네요.<br><br>"오늘 하루 고생 많았어, 마법사."<br>따뜻한 불빛 아래서 건배! 🍻✨'},
-        'T12':{em:'🍸✨',ti:'비밀결사 칵테일 연구소!',tx:'지하 계단을 내려가니 은밀한 공간이!<br>마법사가 셰이커를 흔들며 칵테일을 만들어요.<br><br>"이 한 잔에 오늘의 마법을 담았어요."<br>잔에서 보라빛 연기가 피어올라요. 💜🍸'},
-        '낭만포차':{em:'🌃✨',ti:'하늘 위 비밀 옥상!',tx:'옥상에 올라서니 홍대의 밤하늘이 펼쳐져요!<br>바람이 살랑~ 불어와요.<br><br>"여기서 보는 하늘이 이렇게 예쁜 줄 몰랐어."<br>옐미가 하늘을 올려다보며 미소 지어요. 🌙💕'},
-        '클럽에반스':{em:'🎷✨',ti:'음유시인의 달빛 무대!',tx:'문을 열자 재즈 선율이 옐미를 감싸요.<br>무대 위 음유시인이 노래를 시작해요.<br><br>"이 노래는 오늘 모험을 마친 마법사에게 바칩니다."<br>옐미의 하루가 음악으로 완성돼요. 🎶✨'}
-    };
-    var d=D[place];
-    R('<div class="re">'+d.em+'</div><div class="rt">'+d.ti+'</div><div class="rp">📍 '+place+'</div><div class="rx">'+d.tx+'</div><button class="btn" onclick="ending()">🌟 오늘의 모험을 마무리하기</button>');
-}
-
-// ===== 엔딩 =====
-function ending(){
+  // =============================================
+  //  엔딩
+  // =============================================
+  function ending(){
     prog(8);
     var jH='';
-    for(var i=0;i<J.length;i++){jH+='<div class="ji">'+J[i].label+' → '+J[i].place+'</div>'}
-    R(
-        '<div style="text-align:center;position:relative;z-index:1">'+
-            '<div style="font-size:60px;margin-bottom:15px">🎓✨🪄</div>'+
-            '<div class="et">축하해요, 옐미 마법사!</div>'+
-            '<div class="ex">'+
-                '오늘 하루, 마법학교의 모든 수업을<br>무사히 마쳤어요!<br><br>'+
-                '물약을 만들고, 맛있는 걸 먹고,<br>'+
-                (skippedCafe?'':'하얀 정령들에게 파묻히고,<br>')+
-                '마법을 배우고, 달콤한 걸 먹고,<br>'+
-                '근사한 만찬을 즐기고,<br>'+
-                '밤하늘 아래 건배까지.<br><br>'+
-                '사실 진짜 마법은<br>'+
-                '교실에도, 물약에도, 지팡이에도<br>'+
-                '있는 게 아니었어요.<br><br>'+
-                '오늘 <span class="hl">옐미</span> 옆에서<br>'+
-                '함께 웃고, 걷고, 먹고, 떠들었던<br>'+
-                '이 시간 자체가 마법이었어요. ✨<br><br>'+
-                '앞으로도 이런 마법 같은 날을<br>'+
-                '같이 많이 많이 만들자, <span class="hl">옐미</span>야. 🤍'+
-            '</div>'+
-            '<div class="js"><h3>🗺️ 오늘의 모험 기록</h3>'+jH+'</div>'+
-            '<div class="ed">🦉 5월 22일, 홍대 마법학교에서</div>'+
-        '</div>'
+    for(var i=0;i<J.length;i++){
+      jH+='<div class="jItem"><span class="ji">'+J[i].emoji+'</span> '+J[i].label+' — <span style="color:#ffd700;">'+J[i].place+'</span></div>';
+    }
+    render(
+      '<div class="card">'+
+        '<div style="text-align:center;font-size:48px;margin-bottom:8px;">🎓</div>'+
+        '<div class="ttl" style="text-align:center;">축하해요, 옐미!</div>'+
+        '<div class="txt" style="text-align:center;">홍대 마법학교의 모든 수업을<br>훌륭하게 마쳤어요!</div>'+
+        '<div style="margin:16px 0;">'+jH+'</div>'+
+        '<div class="endMsg">'+
+          '함께 웃고, 걷고, 먹고, 떠들었던<br>'+
+          '이 시간 자체가 마법이었어요. ✨<br><br>'+
+          '앞으로도 이런 마법 같은 날을<br>'+
+          '같이 많이 만들자,<br>'+
+          '<span style="font-size:22px;">옐미</span>야. 💛<br><br>'+
+          '<span style="font-size:14px;opacity:.7;">📅 5월 22일, 홍대 마법학교에서</span>'+
+        '</div>'+
+      '</div>'
     );
     celebrate();
-}
+  }
 
-function celebrate(){
-    if(!document.getElementById('cfs')){
-        var st=document.createElement('style');st.id='cfs';
-        st.textContent='@-webkit-keyframes cfall{0%{-webkit-transform:translateY(0) rotate(0);opacity:1}100%{-webkit-transform:translateY(100vh) rotate(720deg);opacity:0}}@keyframes cfall{0%{transform:translateY(0) rotate(0);opacity:1}100%{transform:translateY(100vh) rotate(720deg);opacity:0}}';
-        document.head.appendChild(st);
-    }
+  function celebrate(){
+    var colors=['#ffd700','#ff6b8a','#67e8f9','#a78bfa','#f0c040','#ff9f43'];
     for(var i=0;i<35;i++){
-        (function(i){
-            setTimeout(function(){
-                var p=document.createElement('div');
-                var c=['#ffd700','#ff6b9d','#c084fc','#67e8f9','#fbbf24','#34d399'];
-                var col=c[Math.floor(Math.random()*c.length)];
-                var sz=Math.random()*8+4;
-                var br=Math.random()>.5?'50%':'2px';
-                var dur=Math.random()*2+2;
-                p.style.cssText='position:fixed;left:'+Math.random()*100+'vw;top:-10px;width:'+sz+'px;height:'+sz+'px;background:'+col+';border-radius:'+br+';pointer-events:none;z-index:1000;-webkit-animation:cfall '+dur+'s linear forwards;animation:cfall '+dur+'s linear forwards;';
-                document.body.appendChild(p);
-                setTimeout(function(){if(p.parentNode)p.parentNode.removeChild(p)},4000);
-            },i*100);
-        })(i);
+      (function(idx){
+        setTimeout(function(){
+          var p=document.createElement('div');
+          p.className='confetti';
+          var c=colors[Math.floor(Math.random()*colors.length)];
+          var sz=Math.random()*6+4;
+          var dur=Math.random()*2+2;
+          p.style.cssText='left:'+Math.random()*100+'vw;width:'+sz+'px;height:'+sz+'px;background:'+c+';-webkit-animation-duration:'+dur+'s;animation-duration:'+dur+'s;border-radius:'+(Math.random()>.5?'50%':'2px')+';';
+          document.body.appendChild(p);
+          setTimeout(function(){if(p.parentNode)p.parentNode.removeChild(p);},dur*1000);
+        },idx*80);
+      })(i);
     }
-}
+  }
 
-// ===== 시작 =====
-intro();
+  // ===== 시작 =====
+  intro();
+})();
 </script>
 </body>
 </html>
